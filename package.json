@@ -1,0 +1,44 @@
+{
+  "name": "stream-recorder",
+  "version": "0.1.0",
+  "description": "A stream, collecting all chunks passed through",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/gulp/bin/gulp.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schnittstabil/stream-recorder.git"
+  },
+  "keywords": [
+    "passthrough",
+    "stream",
+    "record",
+    "collect",
+    "gulpfriendly"
+  ],
+  "author": "Michael Mayer <michael@schnittstabil.de> (https://github.com/schnittstabil)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schnittstabil/stream-recorder/issues"
+  },
+  "homepage": "https://github.com/schnittstabil/stream-recorder",
+  "engines": {
+    "node": "^0.11 || ^0.10"
+  },
+  "files": [
+    "index.js"
+  ],
+  "devDependencies": {
+    "coveralls": "^2.11.0",
+    "expect.js": "^0.3.1",
+    "gulp": "^3.8.5",
+    "gulp-istanbul": "^0.2.0",
+    "gulp-jscs": "^0.6.0",
+    "gulp-jshint": "^1.6.4",
+    "gulp-mocha": "^0.4.1"
+  },
+  "dependencies": {
+    "readable-stream": "^1.0.27-1"
+  }
+}
