@@ -1,6 +1,6 @@
 # stream-recorder [![Dependencies Status Image](https://gemnasium.com/schnittstabil/stream-recorder.svg)](https://gemnasium.com/schnittstabil/stream-recorder) [![Build Status Image](https://travis-ci.org/schnittstabil/stream-recorder.svg)](https://travis-ci.org/schnittstabil/stream-recorder) [![Coverage Status](https://coveralls.io/repos/schnittstabil/stream-recorder/badge.png)](https://coveralls.io/r/schnittstabil/stream-recorder)
 
-A stream, collecting all chunks passed through.
+A Duplex stream which collects all chunks passed through.
 
 ## Usage
 
@@ -51,9 +51,15 @@ Stream recorders are [Transform](http://nodejs.org/api/stream.html#stream_class_
 
 * _options_ `Object` passed through [new stream.Transform([options])](http://nodejs.org/api/stream.html#stream_new_stream_transform_options)
 
+Note: The `new` operator can be omitted.
+
 #### StreamRecorder.data
 
 Array of chunks (`Buffer | String | Object`) passed through, see [transform._transform](http://nodejs.org/api/stream.html#stream_transform_transform_chunk_encoding_callback) for details.
+
+#### StreamRecorder#obj([options])
+
+A convenience wrapper for `new StreamRecorder({objectMode: true, ...})`.
 
 ## License
 

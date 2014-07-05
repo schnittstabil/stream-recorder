@@ -32,4 +32,10 @@ StreamRecorder.prototype._transform = function(chunk, encoding, done) {
   done();
 };
 
+StreamRecorder.obj = function (options) {
+  options = options || {};
+  options.objectMode = true;
+  return new StreamRecorder(options);
+};
+
 module.exports = StreamRecorder;

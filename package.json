@@ -1,7 +1,7 @@
 {
   "name": "stream-recorder",
-  "version": "0.1.1",
-  "description": "A stream, collecting all chunks passed through",
+  "version": "0.2.0",
+  "description": "A Duplex stream which collects all chunks passed through",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

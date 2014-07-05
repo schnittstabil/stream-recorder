@@ -3,6 +3,12 @@ var Recorder = require('../index'),
     expect = require('expect.js'),
     gulp = require('gulp');
 
+function Getter(name) {
+  return function getter(obj) {
+    return obj[name];
+  };
+}
+
 describe('String streams', function() {
   var input = ['foo', '\uD834\uDF06', 'bar'];
 
@@ -45,7 +51,7 @@ describe('Mixed object streams', function() {
   var input = ['foo', 1, { foobar: 'foobar', answer: 42 }, {}, 'bar',
         undefined];
   it('should be recorded', function() {
-    var sut = new Recorder({objectMode: true});
+    var sut = Recorder.obj();
     input.forEach(function(i) {
       sut.write(i);
     }, sut);
@@ -54,12 +60,6 @@ describe('Mixed object streams', function() {
     expect(sut.data).to.eql(input);
   });
 });
-
-function Getter(name) {
-  return function getter(obj) {
-    return obj[name];
-  };
-}
 
 describe('Gulp streams', function() {
   it('paths should be recorded', function(done) {

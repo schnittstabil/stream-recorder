@@ -17,7 +17,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('coverage', function (done) {
-  gulp.src(scripts)
+  gulp.src(scripts.concat(['!test/**']))
     .pipe(istanbul())
     .on('finish', function () {
       /* tests */
