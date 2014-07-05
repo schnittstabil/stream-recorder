@@ -1,6 +1,6 @@
 'use strict';
-var Recorder = require('../index'),
-    expect = require('expect.js'),
+var Recorder = require('./index'),
+    assert = require('assert'),
     gulp = require('gulp');
 
 function Getter(name) {
@@ -19,7 +19,7 @@ describe('String streams', function() {
     }, sut);
     sut.end();
     sut.resume();
-    expect(sut.data.toString()).to.be(input.join(''));
+    assert.strictEqual(sut.data.toString(), input.join(''));
   });
 
   it('should be recorded with decodeStrings:false option', function() {
@@ -29,7 +29,7 @@ describe('String streams', function() {
     }, sut);
     sut.end();
     sut.resume();
-    expect(sut.data.toString()).to.be(input.join(''));
+    assert.strictEqual(sut.data.toString(), input.join(''));
   });
 });
 
@@ -42,7 +42,7 @@ describe('String object streams', function() {
     }, sut);
     sut.end();
     sut.resume();
-    expect(sut.data).to.eql(input);
+    assert.deepEqual(sut.data, input);
   });
 });
 
@@ -57,7 +57,7 @@ describe('Mixed object streams', function() {
     }, sut);
     sut.end();
     sut.resume();
-    expect(sut.data).to.eql(input);
+    assert.deepEqual(sut.data, input);
   });
 });
 
@@ -68,8 +68,7 @@ describe('Gulp streams', function() {
       .pipe(sut)
       .on('error', done)
       .on('finish', function() {
-        expect(sut.data.map(new Getter('path'))).to.eql([__filename]);
-        expect(sut.data.length).to.be(1);
+        assert.deepEqual(sut.data.map(new Getter('path')), [__filename]);
         done();
       });
   });
@@ -79,6 +78,6 @@ describe('StreamRecorder constructor', function() {
   it('should return new instance w/o new', function() {
     var sut = Recorder,
         instance = sut();
-    expect(instance).to.be.a(Recorder);
+    assert.strictEqual(instance instanceof Recorder, true);
   });
 });

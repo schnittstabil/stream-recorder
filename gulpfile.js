@@ -17,14 +17,13 @@ gulp.task('lint', function() {
 });
 
 gulp.task('coverage', function (done) {
-  gulp.src(scripts.concat(['!test/**']))
+  gulp.src(scripts.concat(['!test.js']))
     .pipe(istanbul())
     .on('finish', function () {
       /* tests */
-      gulp.src(['test/**/*.js'])
+      gulp.src(['test.js'])
         .pipe(mocha({
-          reporter: 'dot',
-          timeout: 100000
+          reporter: 'dot'
         }))
         .pipe(istanbul.writeReports({
           reporters: ['lcovonly', 'text-summary']

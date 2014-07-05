@@ -1,8 +1,5 @@
 {
   "globals": {
-    /* expect.js */
-    "expect":      true,
-
     /* mocha */
     "after":      true,
     "afterEach":  true,
