@@ -7,7 +7,7 @@ A stream, collecting all chunks passed through.
 Install using:
 
 ```bash
-npm install --save
+npm install stream-recorder --save
 ```
 
 Then pipe through a recorder instance and retrieve the data:
