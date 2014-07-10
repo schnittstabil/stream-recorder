@@ -22,16 +22,37 @@ describe('String streams', function() {
     assert.strictEqual(sut.data.toString(), input.join(''));
   });
 
-  it('should be recorded with decodeStrings:false option', function() {
-    var sut = new Recorder({decodeStrings: false});
+  it('should be recorded with decodeStrings:false option', function(done) {
+    var sut = new Recorder({decodeStrings: false}, function(err, data){
+      assert.ifError(err);
+      assert.strictEqual(data.toString(), input.join(''));
+      done();
+    });
     input.forEach(function(i) {
       sut.write(i);
     }, sut);
     sut.end();
-    sut.resume();
-    assert.strictEqual(sut.data.toString(), input.join(''));
   });
 });
+
+describe('Erroneous streams', function() {
+  var input = ['foo', 'bar'];
+  it('done Callbac should be called', function(done) {
+    var sut = new Recorder.obj(function(err, data){
+      assert.ok(err);
+      assert.strictEqual(err.length, 1);
+      assert.strictEqual(data.join(''), input.join(''));
+      done();
+    });
+    input.forEach(function(i) {
+      sut.write(i);
+    }, sut);
+    sut.emit('error', new Error('I\'m soooo bad!'));
+    sut.end();
+    sut.resume();
+  });
+});
+
 
 describe('String object streams', function() {
   var input = ['foo', 'bar'];

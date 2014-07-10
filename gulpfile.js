@@ -26,7 +26,7 @@ gulp.task('coverage', function (done) {
           reporter: 'dot'
         }))
         .pipe(istanbul.writeReports({
-          reporters: ['lcovonly', 'text-summary']
+          reporters: ['lcovonly', 'text-summary', 'html']
         }))
         .on('end', done);
     });
