@@ -39,6 +39,5 @@
     "gulp-mocha": "^0.4.1"
   },
   "dependencies": {
-    "readable-stream": "^1.0.27-1"
   }
 }

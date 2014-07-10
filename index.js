@@ -1,5 +1,5 @@
 'use strict';
-var Transform = require('readable-stream/transform'),
+var Transform = require('stream').Transform,
     inherits = require('util').inherits;
 
 function noop() {}
