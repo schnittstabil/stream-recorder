@@ -3,12 +3,6 @@ var Recorder = require('./index'),
     assert = require('assert'),
     gulp = require('gulp');
 
-function Getter(name) {
-  return function getter(obj) {
-    return obj[name];
-  };
-}
-
 describe('String streams', function() {
   var input = ['foo', '\uD834\uDF06', 'bar'];
 
@@ -23,8 +17,7 @@ describe('String streams', function() {
   });
 
   it('should be recorded with callback, but w/o options', function(done) {
-    var sut = new Recorder(function(err, data){
-      assert.ifError(err);
+    var sut = new Recorder(function(data){
       assert.strictEqual(data.toString(), input.join(''));
       done();
     });
@@ -35,8 +28,7 @@ describe('String streams', function() {
   });
 
   it('should be recorded with decodeStrings:false option', function(done) {
-    var sut = new Recorder({decodeStrings: false}, function(err, data){
-      assert.ifError(err);
+    var sut = new Recorder({decodeStrings: false}, function(data){
       assert.strictEqual(data.toString(), input.join(''));
       done();
     });
@@ -46,25 +38,6 @@ describe('String streams', function() {
     sut.end();
   });
 });
-
-describe('Erroneous streams', function() {
-  var input = ['foo', 'bar'];
-  it('done Callbac should be called', function(done) {
-    var sut = new Recorder.obj(function(err, data){
-      assert.ok(err);
-      assert.strictEqual(err.length, 1);
-      assert.strictEqual(data.join(''), input.join(''));
-      done();
-    });
-    input.forEach(function(i) {
-      sut.write(i);
-    }, sut);
-    sut.emit('error', new Error('I\'m soooo bad!'));
-    sut.end();
-    sut.resume();
-  });
-});
-
 
 describe('String object streams', function() {
   var input = ['foo', 'bar'];
@@ -101,7 +74,7 @@ describe('Gulp streams', function() {
       .pipe(sut)
       .on('error', done)
       .on('finish', function() {
-        assert.deepEqual(sut.data.map(new Getter('path')), [__filename]);
+        assert.deepEqual(sut.data.map(function(file) { return file.path; }), [__filename]);
         done();
       });
   });

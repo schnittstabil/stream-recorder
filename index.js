@@ -40,16 +40,10 @@ function StreamRecorder(/* [options], [done] */) {
     this.data = new Buffer('', options.encoding);
   }
 
-  this.errors = [];
-
   var self = this;
-  this.on('error', function(err){
-    self.errors.push(err);
-  });
 
   this.on('finish', function(){
-    var errors = self.errors.length > 0 ? self.errors : null;
-    done.call(done, errors, self.data);
+    done.call(done, self.data);
   });
 }
 inherits(StreamRecorder, Transform);
