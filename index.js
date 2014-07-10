@@ -4,23 +4,22 @@ var Transform = require('stream').Transform,
 
 function noop() {}
 
-function sanitizeArguments(/* [options], [done] */){
-  var options = {},
-      done = noop;
-
-  if (arguments.length === 1) {
-    if (typeof arguments[0] === 'function') {
-      done = arguments[0];
-    } else {
-      options = arguments[0];
-    }
-  } else if (arguments.length > 1) {
-    if (arguments[0]) {
-      options = arguments[0];
-    }
-    done = arguments[1];
+function sanitizeArguments(options, done){
+  if (done) {
+    // both args
+    return [options, done];
   }
-  return [options, done];
+
+  if (!options) {
+    // no args
+    return [{}, noop];
+  }
+
+  // one arg
+  if (typeof options === 'function') {
+    return [{}, options];
+  }
+  return [options, noop];
 }
 
 function StreamRecorder(/* [options], [done] */) {

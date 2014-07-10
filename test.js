@@ -22,6 +22,18 @@ describe('String streams', function() {
     assert.strictEqual(sut.data.toString(), input.join(''));
   });
 
+  it('should be recorded with callback, but w/o options', function(done) {
+    var sut = new Recorder(function(err, data){
+      assert.ifError(err);
+      assert.strictEqual(data.toString(), input.join(''));
+      done();
+    });
+    input.forEach(function(i) {
+      sut.write(i);
+    }, sut);
+    sut.end();
+  });
+
   it('should be recorded with decodeStrings:false option', function(done) {
     var sut = new Recorder({decodeStrings: false}, function(err, data){
       assert.ifError(err);
