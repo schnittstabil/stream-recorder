@@ -66,7 +66,7 @@ describe('yourAwsomeGulpPlugin', function() {
 
 ### Class: StreamRecorder
 
-Stream recorders are [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) streams.
+_StreamRecorder_ are [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) streams.
 
 #### new StreamRecorder([options], [finishCallback])
 
