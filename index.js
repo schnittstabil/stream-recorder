@@ -4,7 +4,7 @@ var Transform = require('stream').Transform,
 
 function noop() {}
 
-function sanitizeArguments(options, done){
+function sanitizeArguments(options, done) {
   if (done) {
     // both args
     return [options, done];
@@ -35,27 +35,27 @@ function StreamRecorder(/* [options], [done] */) {
   this.objectMode = options.objectMode;
 
   if (this.objectMode) {
-    this.data = [];
+    this.buffer = [];
   } else {
-    this.data = new Buffer('', options.encoding);
+    this.buffer = new Buffer('', options.encoding);
   }
 
   var self = this;
 
-  this.on('finish', function(){
-    done.call(done, self.data);
+  this.on('finish', function() {
+    done.call(done, self.buffer);
   });
 }
 inherits(StreamRecorder, Transform);
 
 StreamRecorder.prototype._transform = function(chunk, encoding, done) {
   if (this.objectMode) {
-    this.data.push(chunk);
+    this.buffer.push(chunk);
   } else {
     if (typeof chunk === 'string') {
       chunk = new Buffer(chunk, encoding);
     }
-    this.data = Buffer.concat([this.data, chunk]);
+    this.buffer = Buffer.concat([this.buffer, chunk]);
   }
   this.push(chunk, encoding);
   done();

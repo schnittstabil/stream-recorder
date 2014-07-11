@@ -1,6 +1,6 @@
 {
   "name": "stream-recorder",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A Duplex stream which collects all chunks passed through",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,9 @@
     "stream",
     "record",
     "collect",
-    "gulpfriendly"
+    "gulpfriendly",
+    "test",
+    "helper"
   ],
   "author": "Michael Mayer <michael@schnittstabil.de> (https://github.com/schnittstabil)",
   "license": "MIT",
