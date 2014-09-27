@@ -42,7 +42,7 @@ function StreamRecorder(/* [options], [done] */) {
   }
 
   this.on('finish', function() {
-    done.call(done, self.buffer);
+    done.call(self, self.buffer);
   });
 }
 inherits(StreamRecorder, Transform);
