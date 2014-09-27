@@ -1,6 +1,6 @@
 {
   "name": "stream-recorder",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A Duplex stream which collects all chunks passed through",
   "main": "index.js",
   "scripts": {
