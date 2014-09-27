@@ -16,10 +16,10 @@ gulp.task('lint', function() {
     .pipe(jscs());
 });
 
-gulp.task('coverage', function (done) {
+gulp.task('coverage', function(done) {
   gulp.src(scripts.concat(['!test.js']))
     .pipe(istanbul())
-    .on('finish', function () {
+    .on('finish', function() {
       /* tests */
       gulp.src(['test.js'])
         .pipe(mocha({

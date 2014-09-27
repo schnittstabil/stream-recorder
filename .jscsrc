@@ -7,6 +7,8 @@
   "validateIndentation": 2,
 
   "disallowKeywords": ["with"],
+  "requireMultipleVarDecl": "onevar",
+  "disallowMultipleVarDecl": null,
   "disallowSpacesInsideObjectBrackets": null,
   "disallowImplicitTypeConversion": ["string"]
 }

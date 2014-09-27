@@ -27,7 +27,8 @@ function StreamRecorder(/* [options], [done] */) {
     return new StreamRecorder(arguments[0], arguments[1]);
   }
 
-  var args = sanitizeArguments.apply(null, arguments),
+  var self = this,
+      args = sanitizeArguments.apply(null, arguments),
       options = args[0],
       done = args[1];
 
@@ -39,8 +40,6 @@ function StreamRecorder(/* [options], [done] */) {
   } else {
     this.buffer = new Buffer('', options.encoding);
   }
-
-  var self = this;
 
   this.on('finish', function() {
     done.call(done, self.buffer);
@@ -61,7 +60,7 @@ StreamRecorder.prototype._transform = function(chunk, encoding, done) {
   done();
 };
 
-StreamRecorder.obj = function (/* [options], [done] */) {
+StreamRecorder.obj = function(/* [options], [done] */) {
   var args = sanitizeArguments.apply(null, arguments);
   args[0].objectMode = true;
   return StreamRecorder.apply(null, args);
