@@ -4,7 +4,10 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
     mocha = require('gulp-mocha'),
+    rimraf = require('rimraf'),
     scripts = ['**/*.js', '!node_modules/**', '!coverage/**'];
+
+gulp.task('clean', rimraf.bind(null, 'coverage'));
 
 gulp.task('lint', function() {
   return gulp.src(scripts)
@@ -16,9 +19,10 @@ gulp.task('lint', function() {
     .pipe(jscs());
 });
 
-gulp.task('coverage', function(done) {
+gulp.task('coverage', ['clean'], function(done) {
   gulp.src(scripts.concat(['!test.js']))
     .pipe(istanbul())
+    .pipe(istanbul.hookRequire()) // Force `require` to return covered files
     .on('finish', function() {
       /* tests */
       gulp.src(['test.js'])

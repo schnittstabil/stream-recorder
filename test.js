@@ -97,3 +97,13 @@ describe('StreamRecorder constructor', function() {
     assert.strictEqual(instance instanceof Recorder, true);
   });
 });
+
+describe('StreamRecorder finishCallback', function() {
+  it('should run in the context of StreamRecorder', function(done) {
+    var sut = new Recorder(function() {
+      assert.strictEqual(this, sut);
+      done();
+    });
+    sut.end();
+  });
+});
