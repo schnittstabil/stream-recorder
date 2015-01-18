@@ -1,6 +1,6 @@
 {
   "name": "stream-recorder",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A Duplex stream which collects all chunks passed through",
   "main": "index.js",
   "scripts": {
@@ -29,9 +29,6 @@
   "engines": {
     "node": "^0.11 || ^0.10"
   },
-  "files": [
-    "index.js"
-  ],
   "devDependencies": {
     "coveralls": "^2.11.0",
     "gulp": "^3.8.5",
